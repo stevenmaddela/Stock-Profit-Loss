@@ -85,28 +85,33 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    ticker != "" ? ticker : "",
-                    style: GoogleFonts.spartan(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 20,
-                        color: Colors.black54),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 5,),
-                  Text(
-                    price != "" ? "\$" + price! : "",
-                    style: GoogleFonts.spartan(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 30,
-                        color: Colors.black54),
-                    textAlign: TextAlign.center,
+                  SizedBox(height: MediaQuery.of(context).size.height/20,),
+                  Column(
+                    children: [
+                      Text(
+                        ticker != "" ? ticker : "",
+                        style: GoogleFonts.spartan(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                            color: Colors.black54),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 5,),
+                      Text(
+                        price != "" ? "\$" + price! : "",
+                        style: GoogleFonts.spartan(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30,
+                            color: Colors.black54),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   Row(
                     children: [
@@ -575,6 +580,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           NeumorphicTheme.isUsingDark(context)
                               ? ThemeMode.light
                               : ThemeMode.dark;
+                          print(checkForDialogs().title.toString());
                           if(checkForDialogs().title.toString()!="Text(\"Success\")") {
                             showDialog(
                                 context: context,
@@ -621,6 +627,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: GoogleFonts.montserrat(
                         fontSize: 25, color: finalOutputColor),
                     textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/15,
                   ),
                 ],
               ),
