@@ -65,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
       DeviceOrientation.portraitUp,
     ]);
     return Scaffold(
+      backgroundColor: Color(0xFFcfd7ff),
       body: GestureDetector(
         onTap: (){
           FocusScope.of(context).requestFocus(new FocusNode());
@@ -88,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: MediaQuery.of(context).size.height/20,),
+                  SizedBox(height: MediaQuery.of(context).size.height/15,),
                   Column(
                     children: [
                       Text(
@@ -276,7 +277,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                       FilteringTextInputFormatter.deny(
                                           RegExp(r'[,]'))
                                     ],
-                                    keyboardType: TextInputType.number,
+                                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                                   ),
                                 )),
                             SizedBox(
@@ -400,7 +401,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     FilteringTextInputFormatter.deny(
                                         RegExp(r'[,]'))
                                   ],
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                                 ),
                               )),
                         ],
@@ -453,7 +454,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     FilteringTextInputFormatter.deny(
                                         RegExp(r'[,]'))
                                   ],
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                                 ),
                               )),
                         ],
@@ -509,7 +510,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     FilteringTextInputFormatter.deny(
                                         RegExp(r'[,]'))
                                   ],
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                                 ),
                               )),
                         ],
@@ -562,7 +563,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     FilteringTextInputFormatter.deny(
                                         RegExp(r'[,]'))
                                   ],
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.numberWithOptions(decimal: true),
                                 ),
                               )),
                         ],
@@ -580,13 +581,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           NeumorphicTheme.isUsingDark(context)
                               ? ThemeMode.light
                               : ThemeMode.dark;
-                          print(checkForDialogs().title.toString());
-                          if(checkForDialogs().title.toString()!="Text(\"Success\")") {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    checkForDialogs());
-                          }
+                          checkForDialogs();
                         });
                       },
                       style: NeumorphicStyle(
@@ -629,7 +624,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height/15,
+                    height: MediaQuery.of(context).size.height/12,
                   ),
                 ],
               ),
@@ -640,9 +635,12 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  CupertinoAlertDialog checkForDialogs() {
+  void checkForDialogs() {
     if(price==""){
-      return CupertinoAlertDialog(
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+       CupertinoAlertDialog(
         title: new Text(
             "Stock Value Not Inputted"),
         content: new Text(
@@ -655,10 +653,13 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           )
         ],
-      );
+      ));
     }
     else if(sharesc.value.text!="" && amtc.value.text!=""){
-              return CupertinoAlertDialog(
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+               CupertinoAlertDialog(
                 title: new Text(
                     "Too Many Inputs"),
                 content: new Text(
@@ -671,10 +672,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                   )
                 ],
-              );
+              ));
     }
     else if(valuec.value.text!="" && percentc.value.text!=""){
-              return CupertinoAlertDialog(
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+               CupertinoAlertDialog(
                 title: new Text(
                     "Too Many Inputs"),
                 content: new Text(
@@ -687,10 +691,13 @@ class _MyHomePageState extends State<MyHomePage> {
                     },
                   )
                 ],
-              );
+              ));
     }
     else if(sharesc.value.text=="" && amtc.value.text==""){
-      return CupertinoAlertDialog(
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+       CupertinoAlertDialog(
         title: new Text(
             "Not Enough Inputs"),
         content: new Text(
@@ -703,10 +710,13 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           )
         ],
-      );
+      ));
     }
     else if(valuec.value.text=="" && percentc.value.text==""){
-      return CupertinoAlertDialog(
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+       CupertinoAlertDialog(
         title: new Text(
             "Not Enough Inputs"),
         content: new Text(
@@ -719,25 +729,11 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           )
         ],
-      );
+      ));
     }
     else{
       calculate();
     }
-    return CupertinoAlertDialog(
-      title: new Text(
-          "Success"),
-      content: new Text(
-          "No Errors"),
-      actions: <Widget>[
-        CupertinoDialogAction(
-          child: Text("Ok"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        )
-      ],
-    );
   }
 
   void calculate() {
