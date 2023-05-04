@@ -1,5 +1,5 @@
 # Stock Profit / Loss
-
+<img src="https://user-images.githubusercontent.com/70993825/236104791-2426faec-bd26-40bc-9d75-68f8a9db3290.png" alt="alt text" width="500" height="250">
 A Flutter Stock Profit / Loss Calculator application published on the App Store and Google Play Store.
 
 ## App Store Screenshots
